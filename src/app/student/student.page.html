@@ -1,9 +1,71 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>CRUD</ion-title>
+  <ion-toolbar color="dark">
+    <ion-title>Add Student Detail</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content color="success">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card color="primary">
+          <ion-card-content>
+            <ion-row>
+              <ion-avatar>
+                <img src="../../assets/userImg.png">
+              </ion-avatar>
+            </ion-row>
+            <ion-item>
+              <ion-label position="floating">Name</ion-label>
+              <ion-input type="text" name="Sname" [(ngModel)]="studentObj.name"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Email</ion-label>
+              <ion-input type="text" name="mail" [(ngModel)]="studentObj.email"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Contact Number</ion-label>
+              <ion-input type="tel" name="contact" [(ngModel)]="studentObj.contactNo"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Date of Birth</ion-label>
+              <ion-datetime displayFormat="MM DD YY" placeholder="Select Date" name="DOB" [(ngModel)]="studentObj.dob"></ion-datetime>
+            </ion-item>
+            <ion-item>
+              <ion-label>Gender</ion-label>
+              <ion-select placeholder="Select One" name="gend" [(ngModel)]="studentObj.gender">
+                <ion-select-option *ngFor="let gen of _gender"> {{ gen }} </ion-select-option>
+              </ion-select>                  
+            </ion-item>
+            <ion-item>
+              <ion-label>Course</ion-label>
+              <ion-select placeholder="Select One" name="_course" [(ngModel)]="studentObj.course">
+                <ion-select-option *ngFor="let cur of _courses"> {{ cur }} </ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label>Course Duration</ion-label>
+              <ion-select placeholder="Select One" name="courseDur" [(ngModel)]="studentObj.courseDuration">
+                <ion-select-option *ngFor="let cD of _courseDur"> {{ cD }} </ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Address</ion-label>
+              <ion-textarea rows="2" cols="10" name="add" [(ngModel)]="studentObj.address"></ion-textarea>
+              
+            </ion-item>
+            <ion-button color="dark" (click)="saveStudentDetails()">
+              <ion-icon name="save" slot="start"></ion-icon>
+              Save
+            </ion-button>
+            <ion-button color="danger" [routerLink]="['/home']">
+              <ion-icon name="eye" slot="start"></ion-icon>
+              View Students
+            </ion-button>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+      
+  </ion-grid>
 </ion-content>

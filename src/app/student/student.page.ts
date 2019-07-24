@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StudentSerService } from '../common/student-ser.service';
+import { AlertSerService } from '../common/alert-ser.service';
 
 @Component({
   selector: 'app-student',
@@ -24,44 +25,36 @@ export class StudentPage implements OnInit {
     courseDuration : ""
   }
 
-  
-  students :any = []
   individualStudent : any = {}
   isIndividualStudentObjEmpty = true
   isEdit = false
 
   constructor(
-    private studentAPI : StudentSerService
+    private studentAPI : StudentSerService,
+    private _alertSer : AlertSerService
   ) { }
 
   ngOnInit() {
-    this.getAllStudentDetails()
   }
 
-  getAllStudentDetails(){
-    this.studentAPI.getAllStudents()
-      .subscribe(
-        res => {
-          this.students = res;
-        }, err => {
-          console.log(err)
-        }
-      )
-  }
+  
 
-  studentFullDetail(studentDetail){
-    this.isIndividualStudentObjEmpty = false
-    this.individualStudent = studentDetail
-    console.log("Full Detail",this.individualStudent)
+  // studentFullDetail(studentDetail){
+  //   this.isIndividualStudentObjEmpty = false
+  //   this.individualStudent = studentDetail
+  //   console.log("Full Detail",this.individualStudent)
 
-  }
+  // }
 
   saveStudentDetails(){
     this.studentAPI.createStudentDetail(this.studentObj)
       .subscribe(
         res => {
-          console.log("Response",res);
-          this.reset();
+          if(res){
+            this._alertSer.success("Student detail save successfully.")
+            console.log("Response",res);
+            this.reset();
+          }
         },
         err => {
           console.log(err)
@@ -83,43 +76,43 @@ export class StudentPage implements OnInit {
     }
   }
 
-  deleteStudent(studentID){
-    this.studentAPI.deleteStudentDetail(studentID)
-      .subscribe(
-        res=>{
-          if(res){
-            alert("data removed successfully")
-          }
-        },
-        err=>{
-          console.log(err)
-        }
-      )
-  }
+  // deleteStudent(studentID){
+  //   this.studentAPI.deleteStudentDetail(studentID)
+  //     .subscribe(
+  //       res=>{
+  //         if(res){
+  //           alert("data removed successfully")
+  //         }
+  //       },
+  //       err=>{
+  //         console.log(err)
+  //       }
+  //     )
+  // }
 
-  editStudentInfo(individualStudent){
-    this.isEdit = true
-    this.studentObj = individualStudent
-  }
-  cancel(){
-    this.isEdit = false
-    this.reset()
-  }
-  studID=""
-  updateStudentInfo(){
-    this.studID = this.studentObj._id
-    this.studentAPI.editStudentDetail(this.studID,this.studentObj)
-      .subscribe(
-        res=>{
-          if(res){
-            alert('Student Detail Updated Successfully')
-            this.reset()
-          }
-        },
-        err=>{
-          console.log(err)
-        }
-      )
-  }
+  // editStudentInfo(individualStudent){
+  //   this.isEdit = true
+  //   this.studentObj = individualStudent
+  // }
+  // cancel(){
+  //   this.isEdit = false
+  //   this.reset()
+  // }
+  // studID=""
+  // updateStudentInfo(){
+  //   this.studID = this.studentObj._id
+  //   this.studentAPI.editStudentDetail(this.studID,this.studentObj)
+  //     .subscribe(
+  //       res=>{
+  //         if(res){
+  //           alert('Student Detail Updated Successfully')
+  //           this.reset()
+  //         }
+  //       },
+  //       err=>{
+  //         console.log(err)
+  //       }
+  //     )
+  // }
 
 }
