@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Student List
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-item *ngFor="let student of students">
+              <ion-avatar slot="start">
+                  <!-- <img [src]="student.image"> -->
+                  <img src="../../assets/images/avtar.jpg">
+                </ion-avatar>
+              <h3> {{student.name}}</h3>
+              <p>{{student.gender}}</p>
+              <p>{{student.dob | date: 'MMM d, y'}}</p>
+            </ion-item>
+        </ion-col>
+      </ion-row>
+      
+  </ion-grid>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="addStudentDetail()">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

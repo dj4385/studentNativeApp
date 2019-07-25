@@ -8,14 +8,12 @@ export class AlertSerService {
 
   constructor(private _alertController: AlertController) { }
 
-  async emptyTextFieldMsg(_msg) {
+  async failure(_msg) {
     const alert = await this._alertController.create({
       header: 'Error',
-      // subHeader: 'Subtitle',
       message: _msg,
       buttons: ['OK']
     });
-
     await alert.present();
   }
 

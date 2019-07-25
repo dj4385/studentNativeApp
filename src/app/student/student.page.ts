@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StudentSerService } from '../common/student-ser.service';
 import { AlertSerService } from '../common/alert-ser.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-student',
@@ -31,14 +32,13 @@ export class StudentPage implements OnInit {
 
   constructor(
     private studentAPI : StudentSerService,
-    private _alertSer : AlertSerService
+    private _alertSer : AlertSerService,
+    private _router: Router
   ) { }
 
   ngOnInit() {
   }
-
   
-
   // studentFullDetail(studentDetail){
   //   this.isIndividualStudentObjEmpty = false
   //   this.individualStudent = studentDetail
@@ -52,12 +52,15 @@ export class StudentPage implements OnInit {
         res => {
           if(res){
             this._alertSer.success("Student detail save successfully.")
-            console.log("Response",res);
-            this.reset();
+              .then(()=>{
+                this.reset()
+              }).then(()=>{
+                this._router.navigate(['/student-list'])
+              })
           }
         },
         err => {
-          console.log(err)
+          this._alertSer.failure(err.message)
         }
       )
   }

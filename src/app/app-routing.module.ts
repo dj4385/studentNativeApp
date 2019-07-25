@@ -2,9 +2,10 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'student', pathMatch: 'full' },
-  { path: 'home', loadChildren: './home/home.module#HomePageModule' },
+  { path: '', redirectTo: 'student-list', pathMatch: 'full' },
+  { path: 'home', loadChildren: './home/home.module#homePageModule'},
   { path: 'student', loadChildren: './student/student.module#StudentPageModule' },
+  { path: 'student-list', loadChildren: './student-list/student-list.module#StudentListPageModule' },
 ];
 
 @NgModule({
